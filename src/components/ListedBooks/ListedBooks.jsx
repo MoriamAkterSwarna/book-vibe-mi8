@@ -111,7 +111,7 @@ const ListedBooks = () => {
           <Outlet context={{  wishListedBooks }} />
         </TabPanel> 
 
-        {/* way 2 => using outlet outside of the TabPanel and the TabPanel will be empty */}
+        {/* way 2 => using outlet outside of the TabPanel & the TabPanel will be empty */} 
         {/* <Outlet context={{ readListedBooks, wishListedBooks }} /> */}
       </Tabs>
     </>
