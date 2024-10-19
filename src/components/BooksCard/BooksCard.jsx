@@ -7,6 +7,7 @@ const BooksCard = ({book}) => {
     const { bookId, bookName, author, category, rating, tags, image } = book;
     return (
       
+        <Link to={`/books/${bookId}`}>
         <div className="border-2 border-gray-200 h-[460px] p-6 rounded-md ">
           <div className="bg-base-200 rounded-md">
             <img
@@ -41,6 +42,8 @@ const BooksCard = ({book}) => {
             </div>
           </div>
         </div>
+
+        </Link>
   
     );
 };
