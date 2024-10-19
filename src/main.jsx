@@ -7,11 +7,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-
 import Root from './components/Root/Root';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import Home from './components/Home/Home';
 import BookDetails from './components/BookDetails/BookDetails';
+import ListedBooks from './components/ListedBooks/ListedBooks';
+import ReadListedBooks from './components/ReadListedBooks/ReadListedBooks';
+import WishlistedBooks from './components/WishlistedBooks/WishlistedBooks';
 
 
 const router = createBrowserRouter([
@@ -28,6 +30,21 @@ const router = createBrowserRouter([
         path:"books/:bookId", 
         element: <BookDetails></BookDetails>,
         loader: () => fetch('/booksData.json') 
+      }, 
+      {
+        path: "/listedBooks",
+        element: <ListedBooks></ListedBooks>,
+        loader: () => fetch('/booksData.json'),
+        children: [
+          { 
+            path: "readBooks", 
+            element: <ReadListedBooks></ReadListedBooks>
+          }, 
+          {
+            path: "wishlistBooks", 
+            element: <WishlistedBooks></WishlistedBooks>
+          }
+        ]
       }
       
     ]
