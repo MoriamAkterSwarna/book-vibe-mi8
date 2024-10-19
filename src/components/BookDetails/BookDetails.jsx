@@ -1,12 +1,20 @@
-
 import { useLoaderData, useParams } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
+import { addReadBooks } from "../../utility/addToDb";
+
 
 const BookDetails = () => {
   const data = useLoaderData();
   const { bookId } = useParams();
 
   const book = data.find((book) => book.bookId === parseInt(bookId));  
-  console.log(book);
+
+
+    const handleReadBooks = () => { 
+        
+        addReadBooks(parseInt(bookId));
+    } 
 
 
   const {
@@ -83,7 +91,7 @@ const BookDetails = () => {
 
         <div>
           <button
-            
+            onClick={handleReadBooks}
             className="btn btn-outline  hover:bg-primary focus:outline-none hover:outline-none mr-3 rounded-lg px-7"
           >
             Read
@@ -96,7 +104,8 @@ const BookDetails = () => {
           </button>
         </div>
       </div>
-     
+          
+      <ToastContainer />
     </div>
   );
 };
