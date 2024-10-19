@@ -21,4 +21,28 @@ const addReadBooks = (id) => {
   }
 };
 
-export { addReadBooks, getReadBooks };
+const getWishlistBooks = () => {
+    const wishedBook = localStorage.getItem("wishlist-books");
+    if (wishedBook) {
+      return JSON.parse(wishedBook);
+    }
+    return [];
+  };
+  
+  const addWishlistBooks = (id) => {
+    const wishListedBooks = getWishlistBooks();
+    const storedBooks = getReadBooks();
+    const existsReadBooks = storedBooks.find((bookId) => bookId === id);
+    const exists = wishListedBooks.find((bookId) => bookId === id);
+    if (existsReadBooks) {
+      toast.error("You have Already Read this Books");
+    } else if (!exists && !existsReadBooks) {
+      wishListedBooks.push(id);
+      localStorage.setItem("wishlist-books", JSON.stringify(wishListedBooks));
+      toast.success("Books  Added to WishList");
+    } else {
+      toast.error("You have Already Added to Wishlist");
+    }
+  };
+
+export { addReadBooks, getReadBooks, addWishlistBooks, getWishlistBooks };

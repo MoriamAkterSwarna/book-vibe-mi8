@@ -1,22 +1,19 @@
+
 import { useLoaderData, useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"
-import { addReadBooks } from "../../utility/addToDb";
-
+import "react-toastify/dist/ReactToastify.css";
+import { addReadBooks, addWishlistBooks } from "../../utility/addToDb";
 
 const BookDetails = () => {
   const data = useLoaderData();
+
+
   const { bookId } = useParams();
-
-  const book = data.find((book) => book.bookId === parseInt(bookId));  
-
-
-    const handleReadBooks = () => { 
-        
-        addReadBooks(parseInt(bookId));
-    } 
-
-
+  const bookIdInt = parseInt(bookId);
+    
+const book = data.find((elem) => elem.bookId === bookIdInt); 
+       
+    
   const {
     bookName,
     author,
@@ -30,7 +27,13 @@ const BookDetails = () => {
     yearOfPublishing,
   } = book;
 
-  
+  const handleAddToReadList = () => {
+    addReadBooks(bookIdInt);
+  };
+  const handleWishList = () => {
+    addWishlistBooks(bookIdInt);
+  };
+
   return (
     <div className="w-11/12 mx-auto flex flex-col lg:flex-row my-8  p-12">
       <div className=" w-full lg:w-[50%] bg-base-200 flex justify-center items-center rounded-xl mr-10">
@@ -91,20 +94,19 @@ const BookDetails = () => {
 
         <div>
           <button
-            onClick={handleReadBooks}
+            onClick={handleAddToReadList}
             className="btn btn-outline  hover:bg-primary focus:outline-none hover:outline-none mr-3 rounded-lg px-7"
           >
             Read
           </button>
           <button
-           
+            onClick={handleWishList}
             className="btn bg-secondary hover:bg-cyan-600 mr-3 rounded-lg px-7"
           >
             Wishlist
           </button>
         </div>
       </div>
-          
       <ToastContainer />
     </div>
   );
